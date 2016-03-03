@@ -114,4 +114,16 @@ public class Venue {
           .executeUpdate();
     }
   }
+
+  public void deleteAll() {
+    try(Connection con = DB.sql2o.open()) {
+      String deleteQuery = "DELETE FROM venues;";
+        con.createQuery(deleteQuery)
+          .executeUpdate();
+
+      String joinDeleteQuery = "DELETE FROM bands_venues WHERE venue_id > 0";
+        con.createQuery(joinDeleteQuery)
+          .executeUpdate();
+    }
+  }
 }

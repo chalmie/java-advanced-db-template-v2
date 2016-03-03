@@ -1,7 +1,48 @@
-<body>
-    <h1>Welcome to To Do List</h1>
+index.vtl
 
-    <h3><a href="/categories">Add or view a category</a></h3>
-    <h3><a href="/tasks">Add or view a task</a></h3>
+<h1>Welcome to The Bands Venues Page</h1>
+<div class="row">
+<div class="col-sm-6">
+  <form action="/add/band" method="post">
+    <label for="name">Add Bands</label>
+    <input id="name" name="name" type="text" required>
 
-</body>
+    <button class="btn btn-success" type="submit">Add Band</button>
+  </form>
+</div>
+
+<div class="col-sm-6">
+  <form action="/add/venue" method="post">
+    <label for="name">Add Venue</label>
+    <input id="name" name="name" type="text" required>
+
+    <button class="btn btn-success" type="submit">Add Venue</button>
+  </form>
+</div>
+</div>
+
+
+<div class="row">
+<div class="col-sm-6">
+  <div>
+    <h3>List of all Bands</h3>
+   #foreach ($band in $bands)
+   <p class="btn btn-info">
+     $band.getName()
+   </p>
+   #end
+  </div>
+</div>
+
+<div class="col-sm-6">
+  <div>
+    <h3>List of all Venues</h3>
+   #foreach ($venue in $venues)
+   <p class="btn btn-info">
+     $venue.getName()
+   </p>
+   #end
+  </div>
+</div>
+
+</div>

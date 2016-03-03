@@ -36,6 +36,10 @@ public class Band {
     }
   }
 
+  public void firstToUppercase() {
+    this.name = WordUtils.capitalize(this.name.toLowerCase());
+  }
+
   public void save() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO bands (name) VALUES (:name)";
@@ -43,6 +47,32 @@ public class Band {
         .addParameter("name", this.name)
         .executeUpdate()
         .getKey();
+    }
+  }
+
+  public void delete() {
+    try(Connection con = DB.sql2o.open()) {
+      String deleteQuery = "DELETE FROM bands WHERE id = :id;";
+        con.createQuery(deleteQuery)
+          .addParameter("id", id)
+          .executeUpdate();
+
+      String joinDeleteQuery = "DELETE FROM bands_venues WHERE band_id = :bandId";
+        con.createQuery(joinDeleteQuery)
+          .addParameter("bandId", this.getId())
+          .executeUpdate();
+    }
+  }
+
+  public void deleteAll() {
+    try(Connection con = DB.sql2o.open()) {
+      String deleteQuery = "DELETE FROM bands;";
+        con.createQuery(deleteQuery)
+          .executeUpdate();
+
+      String joinDeleteQuery = "DELETE FROM bands_venues WHERE band_id > 0";
+        con.createQuery(joinDeleteQuery)
+          .executeUpdate();
     }
   }
 
@@ -83,20 +113,6 @@ public class Band {
           venues.add(venue);
       }
       return venues;
-    }
-  }
-
-  public void delete() {
-    try(Connection con = DB.sql2o.open()) {
-      String deleteQuery = "DELETE FROM bands WHERE id = :id;";
-        con.createQuery(deleteQuery)
-          .addParameter("id", id)
-          .executeUpdate();
-
-      String joinDeleteQuery = "DELETE FROM bands_venues WHERE band_id = :bandId";
-        con.createQuery(joinDeleteQuery)
-          .addParameter("bandId", this.getId())
-          .executeUpdate();
     }
   }
 }

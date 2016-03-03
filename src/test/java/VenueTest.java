@@ -1,6 +1,7 @@
 import org.junit.*;
 import static org.junit.Assert.*;
 import java.util.List;
+import org.apache.commons.lang.WordUtils;
 
 public class VenueTest {
 
@@ -41,6 +42,15 @@ public class VenueTest {
     myVenue.save();
     Venue savedVenue = Venue.find(myVenue.getId());
     assertTrue(myVenue.equals(savedVenue));
+  }
+
+  @Test
+  public void firstToUppercase_makesFirstLetterUppercase_true() {
+    Venue myVenue = new Venue("modacenter");
+    myVenue.firstToUppercase();
+    myVenue.save();
+    Venue savedVenue = Venue.all().get(0);
+    assertEquals(savedVenue.getName(), "Modacenter");
   }
 
   @Test

@@ -1,6 +1,7 @@
 import java.util.List;
 import org.sql2o.*;
 import java.util.ArrayList;
+import org.apache.commons.lang.WordUtils;
 
 public class Venue {
   private int id;
@@ -64,6 +65,10 @@ public class Venue {
         .addParameter("id", id)
         .executeUpdate();
     }
+  }
+
+  public void firstToUppercase() {
+    this.name = WordUtils.capitalize(this.name.toLowerCase());
   }
 
   public void addBand(Band band) {

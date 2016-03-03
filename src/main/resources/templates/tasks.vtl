@@ -1,0 +1,19 @@
+<h1>Task list!</h1>
+<p>Add a new task:</p>
+
+<form action="/tasks" method="post">
+  <label for="description">Task Description</label>
+  <input id="description" name="description" type="text">
+
+  <button type="submit">Add task</button>
+</form>
+
+#foreach ($task in $tasks)
+  #if($task.isCompleted())
+    <li class="completed"><a href="/tasks/$task.getId()">$task.getDescription()</a></li>
+  #else
+    <li><a href="/tasks/$task.getId()">$task.getDescription()</a></li>
+  #end
+#end
+
+<p><a href='/'>Home</a></p>

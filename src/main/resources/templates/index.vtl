@@ -15,7 +15,6 @@ index.vtl
   <form action="/add/venue" method="post">
     <label for="name">Add Venue</label>
     <input id="name" name="name" type="text" required>
-
     <button class="btn btn-success" type="submit">Add Venue</button>
   </form>
 </div>
@@ -27,9 +26,7 @@ index.vtl
   <div>
     <h3>List of all Bands</h3>
    #foreach ($band in $bands)
-   <p class="btn btn-info">
-     $band.getName()
-   </p>
+   <a class="btn btn-info" href="/band/$band.getId()">$band.getName()</a><br>
    #end
   </div>
 </div>
@@ -38,9 +35,7 @@ index.vtl
   <div>
     <h3>List of all Venues</h3>
    #foreach ($venue in $venues)
-   <p class="btn btn-info">
-     $venue.getName()
-   </p>
+   <a class="btn btn-info" href="/venue/$venue.getId()">$venue.getName()</a><br>
    #end
   </div>
 </div>

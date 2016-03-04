@@ -1,0 +1,31 @@
+band.vtl
+<h2>$band.getName()</h2>
+
+<form action='/band/update/$band.getId()' method='post'>
+    <!-- <input id="band_id" name="band_id" type="hidden" value="$band.getId()"> -->
+    <label for="venue_id">Select a venue</label>
+    <select id='venue_id' name='venue_id' type='text'>
+      #foreach($venue in $venues)
+        <option value="$venue.getId()">$venue.getName()</option>
+      #end
+    </select>
+    <button type='submit'>Add venue</button>
+</form>
+
+
+<form action="/band/delete/$band.getId()" method="post">
+  <button class="btn btn-success" type="submit">Delete $band.getName()</button>
+</form>
+
+<form action="/band/update/name/$band.getId()" method="post">
+  <label for="name">Update Band Name</label>
+  <input id="name" name="name" type="text" required>
+  <button class="btn btn-success" type="submit">Update</button>
+</form>
+
+<h2>List of Venues $band.getName() has played at</h2>
+#foreach ($venue in $band.getVenues())
+  <p>$venue.getName()</p>
+#end
+
+<a class="btn btn-info" href="/">Go Home</a>
